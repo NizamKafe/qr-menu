@@ -27,29 +27,34 @@
     </section>
   </main>
   <script>
-    const menu={categories:[
-      {id:'coffee',name:'Kahveler',icon:'☕',quote:'Küçük bir kahve, büyük bir mutluluk…',image:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Espresso','Sütlü','Filtre']},
-      {id:'cold',name:'Soğuk Kahveler',icon:'🥤',quote:'Serinletici tatlar, günün en güzel hâli…',image:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Kahve','Milkshake']},
-      {id:'tea',name:'Çaylar',icon:'🫖',quote:'Demini alan güzel bir sohbet gibi…',image:'https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Siyah Çay','Bitki Çayı']},
-      {id:'dessert',name:'Tatlılar',icon:'🥐',quote:'Tatlı bir mola her zaman iyi gelir…',image:'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Pasta','Kruvasan','Sütlü']},
-      {id:'drink',name:'İçecekler',icon:'🍹',quote:'İyi bir içecek, her zaman iyi bir fikirdir…',image:'https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Gazlı','Meyve Suyu']},
-      {id:'snack',name:'Atıştırmalıklar',icon:'🍟',quote:'Küçük atıştırmalıklar, büyük mutluluklar…',image:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85',filters:['Tümü','Tost','Sıcak']}
-    ],products:[
-      ['coffee','Espresso','Küçük ama güçlü, yoğun ve aromatik.','75 TL'],['coffee','Americano','Espresso üzerine sıcak su eklenerek hazırlanır.','80 TL'],['coffee','Latte','Espresso, sıcak süt ve hafif süt köpüğü.','95 TL','Popüler'],['coffee','Cappuccino','Espresso, sıcak süt ve yoğun süt köpüğü.','95 TL'],['coffee','Macchiato','Espresso üzerinde az miktarda süt köpüğü.','85 TL'],['coffee','Mocha','Espresso, sıcak çikolata, süt ve krema.','100 TL'],['coffee','Filtre Kahve','Özenle demlenmiş yumuşak içimli kahve.','85 TL'],
-      ['cold','Ice Americano','Espresso, soğuk su ve buz.','90 TL'],['cold','Ice Latte','Espresso, soğuk süt ve buz.','100 TL'],['cold','Ice Mocha','Çikolata, espresso, süt ve buz.','120 TL'],['cold','Frappe','Kahve, süt ve özel frappe karışımı.','125 TL'],['cold','Milkshake','Çilek, çikolata veya vanilya.','130 TL'],
-      ['tea','Siyah Çay','Taze demlenmiş klasik çay.','35 TL'],['tea','Bitki Çayı','Günün seçili bitki çayı.','65 TL'],['tea','Yeşil Çay','Hafif ve ferah içim.','65 TL'],['tea','Ihlamur','Sıcak ve doğal bitki demlemesi.','65 TL'],
-      ['dessert','Kruvasan Sandviç','Özel iç harcıyla hazırlanan taze kruvasan.','110 TL'],['dessert','Kruvasan Sade','Tereyağlı, kat kat sade kruvasan.','90 TL'],['dessert','Kruvasan Çikolatalı','Çikolata dolgulu taze kruvasan.','100 TL'],['dessert','Sütlü Kadayıf','Sütlü ve hafif geleneksel tatlı.','120 TL'],['dessert','Sütlaç','Fırınlanmış klasik sütlaç.','80 TL'],['dessert','Cheesecake','Günün cheesecake çeşidi.','130 TL','Popüler'],
-      ['drink','Kola','330 ml kutu içecek.','70 TL'],['drink','Fanta','330 ml kutu içecek.','70 TL'],['drink','Limonata','Taze limonla ev yapımı.','90 TL'],['drink','Portakal Suyu','Taze sıkılmış portakal suyu.','100 TL'],['drink','Soda','Şişe soda.','50 TL'],
-      ['snack','Karışık Tost','Sucuk, kaşar ve domates.','150 TL'],['snack','Kaşarlı Tost','Bol kaşarlı sıcak tost.','120 TL'],['snack','Patates Kızartması','Çıtır patates ve özel sos.','90 TL'],['snack','Soğan Halkası','Çıtır kaplamalı soğan halkaları.','90 TL'],['snack','Çıtır Tavuk','Baharatlı çıtır tavuk parçaları.','130 TL']
-    ]};
+    let menu = { categories: [], products: [] };
     const grid=document.getElementById('categoryGrid'),home=document.getElementById('homeScreen'),category=document.getElementById('categoryScreen'),title=document.getElementById('categoryTitle'),hero=document.getElementById('categoryHero'),quote=document.getElementById('categoryQuote'),filters=document.getElementById('filters'),list=document.getElementById('productList');let activeCategory=null,activeImage='';
     const safe=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+    function initializeMenu(){
     grid.innerHTML=menu.categories.map(c=>`<button class="category-card" data-id="${c.id}"><span class="line-icon">${c.icon}</span><strong>${c.name}</strong></button>`).join('');
     grid.querySelectorAll('button').forEach(b=>b.onclick=()=>openCategory(b.dataset.id));
+    }
     function openCategory(id){const c=menu.categories.find(x=>x.id===id);activeCategory=id;activeImage=c.image;title.textContent=c.name;quote.textContent=c.quote;hero.style.backgroundImage=`linear-gradient(90deg,rgba(18,11,5,.78),rgba(18,11,5,.06)),url('${c.image}')`;filters.innerHTML=c.filters.map((f,i)=>`<button class="filter ${i===0?'active':''}" data-filter="${safe(f)}">${safe(f)}</button>`).join('');filters.querySelectorAll('button').forEach(button=>button.onclick=()=>{filters.querySelectorAll('button').forEach(x=>x.classList.remove('active'));button.classList.add('active');renderProducts(activeCategory,activeImage,button.dataset.filter)});renderProducts(id,c.image,'Tümü');home.classList.remove('active');category.classList.add('active');scrollTo(0,0)}
     function matchesFilter(product,filter){if(filter==='Tümü')return true;const text=(product[1]+' '+product[2]).toLocaleLowerCase('tr-TR');const rules={Espresso:['espresso','americano','macchiato'],Sütlü:['latte','cappuccino','mocha'],Filtre:['filtre'],Kahve:['americano','latte','coffee','mocha','frappe'],Milkshake:['milkshake'],'Siyah Çay':['siyah çay'],'Bitki Çayı':['bitki','yeşil','ıhlamur'],Pasta:['cheesecake'],Kruvasan:['kruvasan'],Gazlı:['kola','fanta','soda'],'Meyve Suyu':['limonata','portakal'],Tost:['tost'],Sıcak:['patates','soğan','tavuk']};return(rules[filter]||[filter.toLocaleLowerCase('tr-TR')]).some(word=>text.includes(word.toLocaleLowerCase('tr-TR')))}
     function renderProducts(id,image,filter='Tümü'){const items=menu.products.filter(p=>p[0]===id&&matchesFilter(p,filter));list.innerHTML=items.length?items.map((p,i)=>`<article class="product"><img src="${image}" alt="${safe(p[1])}" style="object-position:${30+(i%4)*15}% center"><div><h3>${safe(p[1])}${p[4]?`<span class="popular">${safe(p[4])}</span>`:''}</h3><p>${safe(p[2])}</p></div><div class="price">${safe(p[3])}</div></article>`).join(''):'<div class="empty">Bu filtrede ürün bulunamadı.</div>'}
     document.getElementById('backButton').onclick=()=>{category.classList.remove('active');home.classList.add('active');scrollTo(0,0)};
+    async function loadMenu(){
+      grid.innerHTML = '<div class="empty">Menü yükleniyor…</div>';
+      try {
+        const response = await fetch('./menu.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const data = await response.json();
+        if (!data || !Array.isArray(data.categories) || !Array.isArray(data.products)) {
+          throw new Error('Geçersiz menü verisi');
+        }
+        menu = data;
+        initializeMenu();
+      } catch (error) {
+        console.error('Menü yüklenemedi:', error);
+        grid.innerHTML = '<div class="empty">Menü şu anda yüklenemiyor. Lütfen sayfayı yenileyip tekrar deneyin.</div>';
+      }
+    }
+    loadMenu();
   </script>
 </body>
 </html>
