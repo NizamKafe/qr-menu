@@ -73,6 +73,16 @@
         "Tost",
         "Sıcak"
       ]
+    },
+    {
+      "name": "test",
+      "icon": "t",
+      "quote": "",
+      "image": "",
+      "id": "a5bdc3ad-0052-4f11-9e6f-b14745139e4b",
+      "filters": [
+        "Tümü"
+      ]
     }
   ],
   "products": [
