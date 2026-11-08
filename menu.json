@@ -28,14 +28,16 @@
     {
       "id": "tea",
       "name": "Çaylar",
-      "icon": "🫖",
+      "icon": "",
       "quote": "Demini alan güzel bir sohbet gibi…",
-      "image": "https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=900&q=85",
+      "image": "https://nizamkafe.github.io/qr-menu/images/products/d16e943f-a55d-4b66-8b83-756b51f3f1a9.webp",
       "filters": [
         "Tümü",
         "Siyah Çay",
         "Bitki Çayı"
-      ]
+      ],
+      "name_en": "Teas",
+      "quote_en": "Like a lovely conversation, brewed to perfection."
     },
     {
       "id": "dessert",
@@ -72,16 +74,6 @@
         "Tümü",
         "Tost",
         "Sıcak"
-      ]
-    },
-    {
-      "name": "test",
-      "icon": "t",
-      "quote": "",
-      "image": "",
-      "id": "a5bdc3ad-0052-4f11-9e6f-b14745139e4b",
-      "filters": [
-        "Tümü"
       ]
     }
   ],
